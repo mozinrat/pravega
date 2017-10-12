@@ -196,7 +196,7 @@ public class ReaderGroupImpl implements ReaderGroup, ReaderGroupMetrics {
         for (Segment s : FutureHelpers.getAndHandleExceptions(unread, RuntimeException::new)) {
             @Cleanup
             SegmentMetadataClient metadataClient = metaFactory.createSegmentMetadataClient(s);
-            totalLength += metadataClient.fetchCurrentStreamLength();
+            totalLength += metadataClient.fetchCurrentSegmentLength();
         }
         for (long bytesRead : position.getPositions().values()) {
             totalLength -= bytesRead;
